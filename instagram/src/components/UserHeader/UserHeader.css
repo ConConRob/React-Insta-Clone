@@ -1,0 +1,15 @@
+.userheader{
+    display: flex;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.userheader img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.userheader p {
+    font-weight: 500;
+    padding-left: 20px;
+}

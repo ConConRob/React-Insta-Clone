@@ -1,7 +1,7 @@
 import React from 'react';
 import PT from 'prop-types';
 import CommentSection from '../CommentSection/CommentSection';
-import UserHeader from './UserHeader';
+import UserHeader from '../UserHeader/UserHeader';
 import PostButtons from '../PostButtons/PostButtons'
 
 export default function PostContainer({postData}){
