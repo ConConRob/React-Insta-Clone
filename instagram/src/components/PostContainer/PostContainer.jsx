@@ -1,13 +1,17 @@
 import React from 'react';
 import PT from 'prop-types';
 import CommentSection from '../CommentSection/CommentSection';
-
+import UserHeader from './UserHeader';
+import PostButtons from '../PostButtons/PostButtons'
 
 export default function PostContainer({postData}){
-    console.log(postData);
     return (
         <div className='post-container'>
-        <CommentSection comments={postData.comments} />
+            <UserHeader username={postData.username} thumbnailUrl={postData.thumbnailUrl}/>
+            <img className="post-image" src={postData.imageUrl} alt="Post"/>
+            <PostButtons />
+            <p className="post-likes">{`${postData.likes} likes`}</p>
+            <CommentSection comments={postData.comments} />
          </div>
     )
 }
