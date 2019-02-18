@@ -6,13 +6,13 @@ import UserHeader from '../UserHeader/UserHeader';
 
 import './PostContainer.css';
 
-export default function PostContainer({postData}){
+export default function PostContainer({postData, addComment}){
     return (
         <div className='post-container'>
             <UserHeader username={postData.username} thumbnailUrl={postData.thumbnailUrl}/>
             <img className="post-image" src={postData.imageUrl} alt="Post"/>
            
-            <CommentSection comments={postData.comments} likes={postData.likes} />
+            <CommentSection comments={postData.comments} likes={postData.likes} id={postData.id} addComment={addComment}/>
          </div>
     )
 }

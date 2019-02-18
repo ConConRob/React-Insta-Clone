@@ -10,12 +10,31 @@ class App extends Component {
       postsData: this.props.data,
     }
   }
+  // add a comment to list of comments for post 
+  addComment = (user, text, id) => {
+    this.setState(currentState => {
+      const newPostData = currentState.postsData.map(postData => {
+        if(postData.id === id){
+          postData.comments=postData.comments.concat({
+            username: user,
+            text,
+          });
+        }
+          return postData;
+      })
+      return {
+        postsData: newPostData,
+      }
+    })
+
+  }
 
   render() {
+    
     return (
       <div className="App">
         <SearchBar />
-        {this.state.postsData.map((postData, index )=> <PostContainer key={index} postData={postData}/> )}
+        {this.state.postsData.map((postData)=> <PostContainer key={postData.id}  postData={postData} addComment={this.addComment}/> )}
       </div>
     );
   }
