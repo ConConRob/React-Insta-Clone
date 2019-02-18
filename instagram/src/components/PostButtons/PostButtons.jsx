@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './PostButtons.css';
 export default function PostButtons(){
     return (
         <div className="post-buttons">

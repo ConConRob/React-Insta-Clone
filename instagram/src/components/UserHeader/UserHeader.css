@@ -1,15 +1,15 @@
 .userheader{
     display: flex;
     align-items: center;
-    padding: 10px 30px;
+    padding: 5px 2.5%;
 }
 
 .userheader img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
 }
 .userheader p {
     font-weight: 500;
-    padding-left: 20px;
+    padding-left: 10px;
 }

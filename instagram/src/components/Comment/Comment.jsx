@@ -1,5 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
+import './Comment.css';
 
 export default function Comment({username, text}){
     return (
