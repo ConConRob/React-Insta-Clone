@@ -11,7 +11,7 @@ export default function SearchBar() {
             </div>
                 
       
-            <input type="text" className="search-bar-search" placeholder="🔍 Search" />
+            <input  type="text" className="search-bar-search" placeholder='&#xf002; Add Comment' />
             <div className="search-bar-buttons">
                 <i class="far fa-compass"></i>
                 <i class="far fa-heart"></i>
