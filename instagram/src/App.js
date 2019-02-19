@@ -9,9 +9,17 @@ class App extends Component {
     this.state ={ postsData:[]};
     this.allPosts = this.props.data;
   }
-
+ 
   componentDidMount() {
-    this.setState({postsData: this.props.data})
+    if(localStorage.getItem('postsData')){
+      this.allPosts = JSON.parse(localStorage.getItem('postsData'));
+      this.setState({postsData: this.allPosts});
+    }else {
+      this.setState({postsData: this.props.data})
+    }
+  }
+  componentWillUpdate() {
+    localStorage.setItem('postsData', JSON.stringify(this.allPosts));
   }
   // add a comment to list of comments for post 
   addComment = (user, text, id) => {
@@ -48,17 +56,18 @@ class App extends Component {
       }
     })
   }
-  // filter desplayed list by username
+  // filter desplayed list of posts by username
   filterPostsByUsername = (searchTerm) => {
     const newDisplayedPosts = this.allPosts.filter(allPostsPost => 
        allPostsPost.username.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    console.log(newDisplayedPosts)
     this.setState({postsData: newDisplayedPosts})
   }
+
   render() {
     return (
       <div className="App">
+      {/* <button onClick={()=>console.log(this.allPosts)} >show data</button> */}
         <SearchBar 
           filterPostsByUsername={this.filterPostsByUsername}
         />
