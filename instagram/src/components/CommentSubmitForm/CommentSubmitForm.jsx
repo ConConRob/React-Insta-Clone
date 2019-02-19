@@ -1,5 +1,6 @@
 import React from 'react';
-
+import PT from 'prop-types';
+import './CommentSubmitForm.css'
 class CommentSubmitForm extends React.Component {
     constructor(props){
         super(props);
@@ -18,8 +19,10 @@ class CommentSubmitForm extends React.Component {
     }
     render(){
         return (
-            <form onSubmit={(event) => {
-                this.handleSubmit(event,'Connor',this.state.currentInputValue,this.props.id)
+            <form
+                className="comment-section-add-form" 
+                onSubmit={(event) => {
+                    this.handleSubmit(event,'Connor',this.state.currentInputValue,this.props.id)
             }}
             >
                 <input 
@@ -31,8 +34,8 @@ class CommentSubmitForm extends React.Component {
                     placeholder="Add a comment..." 
                 />
                 <button 
-                    
-                         type="submit">
+                    className="comment-section-add-button"
+                     type="submit">
                          ...
                 </button>
             </form>
@@ -41,3 +44,9 @@ class CommentSubmitForm extends React.Component {
 }
 
 export default CommentSubmitForm;
+
+CommentSubmitForm.propTypes = {
+    id: PT.string.isRequired,
+    addComment: PT.func.isRequired,
+    user: PT.string.isRequired,
+}

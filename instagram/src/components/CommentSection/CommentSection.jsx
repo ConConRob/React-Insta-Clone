@@ -6,11 +6,7 @@ import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
 import './CommentSection.css'
 
 export default function CommentSection({comments, likes, id, addComment}){
-    function handleSubmit(event,user, text ,id) {
-        event.preventdefault()
-        addComment(user,text,id);
-        
-    }
+
     return (
         <div className="comment-section">
              <PostButtons />
@@ -19,7 +15,6 @@ export default function CommentSection({comments, likes, id, addComment}){
                 comments.map((comment, index) => <Comment key={index} username={comment.username} text={comment.text} />)
             }
             <CommentSubmitForm id={id} addComment={addComment} user={'Connor'}/>
-            
         </div>
         
     )
