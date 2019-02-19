@@ -5,14 +5,20 @@ import Comment from '../Comment/Comment';
 import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
 import './CommentSection.css'
 
-export default function CommentSection({comments, likes, id, addComment}){
+export default function CommentSection({comments, likes, id, addComment, addLike}){
 
     return (
         <div className="comment-section">
-             <PostButtons />
+             <PostButtons id={id} addLike={addLike} />
             <p className="post-likes">{`${likes} likes`}</p>
             {
-                comments.map((comment, index) => <Comment key={index} username={comment.username} text={comment.text} />)
+                comments.map((comment, index) => 
+                    <Comment 
+                        key={index} 
+                        username={comment.username} 
+                        text={comment.text} 
+                    />
+                )
             }
             <CommentSubmitForm id={id} addComment={addComment} user={'Connor'}/>
         </div>
@@ -22,4 +28,8 @@ export default function CommentSection({comments, likes, id, addComment}){
 
 CommentSection.propTypes = {
     comments: PT.array.isRequired,
+    likes: PT.number.isRequired,
+    id: PT.string.isRequired,
+    addComment: PT.func.isRequired,
+    addLike: PT.func.isRequired,
 }

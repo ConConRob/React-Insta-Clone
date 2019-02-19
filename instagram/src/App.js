@@ -4,7 +4,6 @@ import SearchBar from './components/SearchBar/SearchBar';
 import PT from 'prop-types';
 import './App.css'
 class App extends Component {
-  
   constructor(props){
     super(props);
     this.state ={ postsData:[]}
@@ -29,15 +28,38 @@ class App extends Component {
         postsData: newPostData,
       }
     })
-
   }
-
+  // in the future keep track of who made the like
+  addOrRemoveLike = (id,isAdd) => {
+    this.setState(currentState => {
+      const newPostData = currentState.postsData.map(postData => {
+        if(postData.id === id){
+          if(isAdd){
+            postData.likes = postData.likes + 1;
+          }else {
+            postData.likes = postData.likes -1;
+          }
+        }
+        return postData;
+      });
+      return {
+        postsData: newPostData,
+      }
+    })
+  }
   render() {
     
     return (
       <div className="App">
         <SearchBar />
-        {this.state.postsData.map((postData)=> <PostContainer key={postData.id}  postData={postData} addComment={this.addComment}/> )}
+        {this.state.postsData.map((postData)=> 
+          <PostContainer 
+            key={postData.id}  
+            postData={postData} 
+            addComment={this.addComment}
+            addLike={this.addOrRemoveLike}
+          /> 
+          )}
       </div>
     );
   }
