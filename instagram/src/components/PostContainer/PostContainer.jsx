@@ -7,7 +7,10 @@ import './PostContainer.css';
 export default function PostContainer({postData, addComment, addLike}){
     return (
         <div className='post-container'>
-            <UserHeader username={postData.username} thumbnailUrl={postData.thumbnailUrl}/>
+            <UserHeader 
+                username={postData.username} 
+                thumbnailUrl={postData.thumbnailUrl}
+            />
             <img className="post-image" src={postData.imageUrl} alt="Post"/>
            
             <CommentSection 

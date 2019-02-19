@@ -6,7 +6,8 @@ import './App.css'
 class App extends Component {
   constructor(props){
     super(props);
-    this.state ={ postsData:[]}
+    this.state ={ postsData:[]};
+    this.allPosts = this.props.data;
   }
 
   componentDidMount() {
@@ -47,11 +48,20 @@ class App extends Component {
       }
     })
   }
+  // filter desplayed list by username
+  filterPostsByUsername = (searchTerm) => {
+    const newDisplayedPosts = this.allPosts.filter(allPostsPost => 
+       allPostsPost.username.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    console.log(newDisplayedPosts)
+    this.setState({postsData: newDisplayedPosts})
+  }
   render() {
-    
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar 
+          filterPostsByUsername={this.filterPostsByUsername}
+        />
         {this.state.postsData.map((postData)=> 
           <PostContainer 
             key={postData.id}  
