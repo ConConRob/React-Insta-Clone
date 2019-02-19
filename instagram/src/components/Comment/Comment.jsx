@@ -2,10 +2,14 @@ import React from 'react';
 import PT from 'prop-types';
 import './Comment.css';
 
-export default function Comment({username, text}){
+export default function Comment({username, text, postID, commentID, deleteAComment}){
+    function deleteHandler(){
+        deleteAComment(postID, commentID)
+    }
+    
     return (
-        <div className="comment-section-comment">
-        <span className="comment-section-comment-user">{username}</span>
+        <div  className="comment-section-comment">
+        <span onClick={deleteHandler} className="comment-section-comment-user">{username}</span>
         <span className="comment-section-comment-text">{text}</span>
         </div>
     )

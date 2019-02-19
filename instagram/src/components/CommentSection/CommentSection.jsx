@@ -5,7 +5,7 @@ import Comment from '../Comment/Comment';
 import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
 import './CommentSection.css'
 
-export default function CommentSection({comments, likes, liked, id, addComment, addLike}){
+export default function CommentSection({comments, likes, liked, id, addComment, addLike, deleteAComment}){
 
     return (
         <div className="comment-section">
@@ -16,7 +16,10 @@ export default function CommentSection({comments, likes, liked, id, addComment, 
                     <Comment 
                         key={index} 
                         username={comment.username} 
-                        text={comment.text} 
+                        text={comment.text}
+                        postID={id}
+                        commentID={comment.id}
+                        deleteAComment={deleteAComment} 
                     />
                 )
             }

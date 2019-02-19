@@ -3,6 +3,8 @@ import PostContainer from './components/PostContainer/PostContainer.jsx';
 import SearchBar from './components/SearchBar/SearchBar';
 import PT from 'prop-types';
 import './App.css'
+const uuidv4 = require('uuid/v4');
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -27,6 +29,7 @@ class App extends Component {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){
           postData.comments=postData.comments.concat({
+            id: uuidv4(),
             username: user,
             text,
           });
@@ -65,7 +68,23 @@ class App extends Component {
     )
     this.setState({postsData: newDisplayedPosts})
   }
+  // delete a comment
+  deleteAComment = (postID, commentID) => {
+    console.log('here')
+    this.setState(currentState => {
+      const newData = currentState.postsData.map(postData => {
 
+        if(postData.id === postID){
+          postData.comments = postData.comments.filter(comment => comment.id!==commentID)
+        }
+        return postData;
+      })
+      console.log(newData)
+      return {
+        postsData: newData,
+      }
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -79,6 +98,7 @@ class App extends Component {
             postData={postData} 
             addComment={this.addComment}
             addLike={this.addOrRemoveLike}
+            deleteAComment={this.deleteAComment}
           /> 
           )}
       </div>
