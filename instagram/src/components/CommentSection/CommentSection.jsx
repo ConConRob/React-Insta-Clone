@@ -2,13 +2,13 @@ import React from 'react';
 import PT from 'prop-types';
 import PostButtons from '../PostButtons/PostButtons'
 import Comment from '../Comment/Comment';
+import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
 import './CommentSection.css'
 
 export default function CommentSection({comments, likes, id, addComment}){
-    function handleOnEnter(event,user, text ,id) {
-        if(event.key==='Enter'){
-            addComment(user,text,id);
-        }
+    function handleSubmit(event,user, text ,id) {
+        event.preventdefault()
+        addComment(user,text,id);
         
     }
     return (
@@ -18,7 +18,8 @@ export default function CommentSection({comments, likes, id, addComment}){
             {
                 comments.map((comment, index) => <Comment key={index} username={comment.username} text={comment.text} />)
             }
-            <input onKeyUp={(event)=>handleOnEnter(event,'Connor',event.target.value,id)}  type="text" className="comment-section-add"  placeholder="Add a comment..." />
+            <CommentSubmitForm id={id} addComment={addComment} user={'Connor'}/>
+            
         </div>
         
     )

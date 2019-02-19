@@ -4,11 +4,14 @@ import SearchBar from './components/SearchBar/SearchBar';
 import PT from 'prop-types';
 import './App.css'
 class App extends Component {
+  
   constructor(props){
     super(props);
-    this.state = {
-      postsData: this.props.data,
-    }
+    this.state ={ postsData:[]}
+  }
+
+  componentDidMount() {
+    this.setState({postsData: this.props.data})
   }
   // add a comment to list of comments for post 
   addComment = (user, text, id) => {
