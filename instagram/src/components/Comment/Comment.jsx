@@ -9,8 +9,12 @@ export default function Comment({username, text, postID, commentID, deleteAComme
     
     return (
         <div  className="comment-section-comment">
-        <span onClick={deleteHandler} className="comment-section-comment-user">{username}</span>
-        <span className="comment-section-comment-text">{text}</span>
+        <div>
+            <span onClick={deleteHandler} className="comment-section-comment-user">{username}</span>
+            <span className="comment-section-comment-text">{text}</span>
+        </div>
+        
+        <button className="comment-section-comment-delete" onClick={deleteHandler}>Delete</button>
         </div>
     )
 }
