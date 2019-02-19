@@ -15,10 +15,12 @@ export default function PostContainer({postData, addComment, addLike}){
            
             <CommentSection 
                 comments={postData.comments} 
-                likes={postData.likes} 
+                likes={postData.likes}
+                liked = {postData.liked} 
                 id={postData.id} 
                 addComment={addComment}
                 addLike={addLike}
+
             />
          </div>
     )

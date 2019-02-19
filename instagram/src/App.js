@@ -45,8 +45,10 @@ class App extends Component {
         if(postData.id === id){
           if(isAdd){
             postData.likes = postData.likes + 1;
+            postData.liked = true;
           }else {
             postData.likes = postData.likes -1;
+            postData.liked = false;
           }
         }
         return postData;

@@ -1,14 +1,8 @@
 import React from 'react';
 import './PostButtons.css';
 export default class PostButtons extends React.Component{
-    super(props){
-
-    }
-    state={
-        liked:false,
-    }
     handleLike = () => {
-        if(this.state.liked){
+        if(this.props.liked){
             // already liked
             // remove like
             this.props.addLike(this.props.id, false)
@@ -24,7 +18,7 @@ export default class PostButtons extends React.Component{
         return (
             <div className="post-buttons">
             {
-                this.state.liked?
+                this.props.liked?
                     <i onClick={this.handleLike} className="fas fa-heart"></i>
                 :
                     <i onClick={this.handleLike}  className="far fa-heart"></i>
