@@ -8,8 +8,8 @@ export default class Login extends React.Component {
     }
 
     setUser = (event) => {
-        event.preventDefault()
-        localStorage.setItem('username', this.state.usernameInput)
+        event.preventDefault();
+        this.props.logIn(this.state.usernameInput);
     }
     onChange = (event, whatToUpdate) => {
         this.setState({[whatToUpdate]: event.target.value})
