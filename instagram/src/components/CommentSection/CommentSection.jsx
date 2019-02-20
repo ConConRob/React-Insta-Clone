@@ -14,7 +14,8 @@ export default function CommentSection({user, comments, likes, liked, id, addCom
             {
                 comments.map((comment, index) => 
                     <Comment 
-                        key={index} 
+                        key={index}
+                        loggedInUser={user} 
                         username={comment.username} 
                         text={comment.text}
                         postID={id}
