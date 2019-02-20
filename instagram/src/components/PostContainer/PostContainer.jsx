@@ -4,7 +4,7 @@ import CommentSection from '../CommentSection/CommentSection';
 import UserHeader from '../UserHeader/UserHeader';
 import './PostContainer.css';
 
-export default function PostContainer({postData, addComment, addOrRemoveLike, deleteAComment}){
+export default function PostContainer({user, postData, addComment, addOrRemoveLike, deleteAComment}){
     return (
         <div className='post-container'>
             <UserHeader 
@@ -14,6 +14,7 @@ export default function PostContainer({postData, addComment, addOrRemoveLike, de
             <img className="post-image" src={postData.imageUrl} alt="Post"/>
            
             <CommentSection 
+                user={user}
                 comments={postData.comments} 
                 likes={postData.likes}
                 liked = {postData.liked} 

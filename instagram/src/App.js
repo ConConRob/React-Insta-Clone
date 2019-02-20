@@ -8,14 +8,18 @@ import './App.css'
 const uuidv4 = require('uuid/v4');
 
 class App extends Component {
-  constructor(){
-    super()
-    this.state ={ postsData:[],};
+  constructor(props){
+    super(props)
+    this.state ={ 
+      postsData:[],
+      currentUser: this.props.user
+    };
     this.allPosts = dummyData;
   }
   
   // add a comment to list of comments for post 
   addComment = (user, text, id) => {
+    console.log(user);
     this.setState(currentState => {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){

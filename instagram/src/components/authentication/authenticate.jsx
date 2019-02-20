@@ -5,29 +5,34 @@ const authenticate =(Component, LoginComponent) =>
     class Authenticate extends React.Component {
         state = {
             loggedIn: false,
+            user: '',
         }
 
         logIn = (username) => {
             localStorage.setItem('username', username);
-            this.setState({loggedIn: true})
+            this.setState({
+                loggedIn: true,
+                user: username
+            })
         }
 
         logOut = () => {
             localStorage.set('username', '');
-            this.setState({loggedIn: false})
+            this.setState({
+                loggedIn: false,
+                user:'',
+            })
         }
 
         componentDidMount() {
             const loggedIn = !!localStorage.getItem('username');
-            this.setState({loggedIn})
+            this.setState({loggedIn, user:localStorage.getItem('username')})
         }
 
         componentDidUpdate() {
-            console.log('here');
             const loggedIn = !!localStorage.getItem('username');
-            console.log(localStorage.getItem('username'));
             if(this.state.loggedIn !== loggedIn){
-                this.setState({loggedIn})
+                this.setState({loggedIn, user: ''})
             }
         }
         render(){
@@ -35,7 +40,7 @@ const authenticate =(Component, LoginComponent) =>
                 return <LoginComponent logIn={this.logIn}/>
             }else {
                 return(
-                    <Component {...this.props} />
+                    <Component {...this.props} user={this.state.user} />
                 )
             }
         }

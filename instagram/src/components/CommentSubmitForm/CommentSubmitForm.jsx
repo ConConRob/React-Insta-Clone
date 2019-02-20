@@ -9,9 +9,9 @@ class CommentSubmitForm extends React.Component {
         }
     }
 
-    handleSubmit=(event,user, text ,id) => {
+    handleSubmit=(event, text ,id) => {
         event.preventDefault();
-        this.props.addComment(user,text,id);
+        this.props.addComment(this.props.user,text,id);
         this.setState({currentInputValue:''})
     }
     handleChange=(event)=> {
@@ -22,7 +22,7 @@ class CommentSubmitForm extends React.Component {
             <form
                 className="comment-section-add-form" 
                 onSubmit={(event) => {
-                    this.handleSubmit(event,'Connor',this.state.currentInputValue,this.props.id)
+                    this.handleSubmit(event,this.state.currentInputValue,this.props.id)
             }}
             >
                 <input 
