@@ -5,11 +5,11 @@ import Comment from '../Comment/Comment';
 import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
 import './CommentSection.css'
 
-export default function CommentSection({comments, likes, liked, id, addComment, addLike, deleteAComment}){
+export default function CommentSection({comments, likes, liked, id, addComment, addOrRemoveLike, deleteAComment}){
 
     return (
         <div className="comment-section">
-             <PostButtons id={id} liked={liked} addLike={addLike} />
+             <PostButtons id={id} liked={liked} addLike={addOrRemoveLike} />
             <p className="post-likes">{`${likes} likes`}</p>
             {
                 comments.map((comment, index) => 
@@ -34,5 +34,5 @@ CommentSection.propTypes = {
     likes: PT.number.isRequired,
     id: PT.string.isRequired,
     addComment: PT.func.isRequired,
-    addLike: PT.func.isRequired,
+    addOrRemoveLike: PT.func.isRequired,
 }
