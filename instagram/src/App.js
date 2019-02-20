@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PostContainer from './components/PostContainer/PostContainer.jsx';
+import PostsPage from './components/PostsPage/PostsPage';
 import SearchBar from './components/SearchBar/SearchBar';
 import PT from 'prop-types';
 import './App.css'
@@ -92,15 +92,12 @@ class App extends Component {
         <SearchBar 
           filterPostsByUsername={this.filterPostsByUsername}
         />
-        {this.state.postsData.map((postData)=> 
-          <PostContainer 
-            key={postData.id}  
-            postData={postData} 
-            addComment={this.addComment}
-            addLike={this.addOrRemoveLike}
-            deleteAComment={this.deleteAComment}
-          /> 
-          )}
+        <PostsPage 
+          postsData={this.state.postsData}
+          addComment={this.addComment}
+          addOrRemoveLike={this.addOrRemoveLike}
+          deleteAComment={this.deleteAComment}
+        />
       </div>
     );
   }
