@@ -10,7 +10,7 @@ export default function Comment({loggedInUser, username, text, postID, commentID
     return (
         <div  className="comment-section-comment">
         <div>
-            <span onClick={deleteHandler} className="comment-section-comment-user">{username}</span>
+            <span className="comment-section-comment-user">{username}</span>
             <span className="comment-section-comment-text">{text}</span>
         </div>
         {

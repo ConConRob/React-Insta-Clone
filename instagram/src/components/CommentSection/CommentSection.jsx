@@ -9,7 +9,12 @@ export default function CommentSection({user, comments, likes, liked, id, addCom
 
     return (
         <div className="comment-section">
-             <PostButtons id={id} liked={liked} addLike={addOrRemoveLike} />
+            <PostButtons 
+                user={user} 
+                id={id} 
+                liked={liked} 
+                addLike={addOrRemoveLike} 
+            />
             <p className="post-likes">{`${likes} likes`}</p>
             {
                 comments.map((comment, index) => 

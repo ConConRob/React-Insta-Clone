@@ -19,7 +19,6 @@ class App extends Component {
   
   // add a comment to list of comments for post 
   addComment = (user, text, id) => {
-    console.log(user);
     this.setState(currentState => {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){
@@ -37,16 +36,19 @@ class App extends Component {
     })
   }
   // in the future keep track of who made the like
-  addOrRemoveLike = (id,isAdd) => {
+  addOrRemoveLike = (id, user) => {
+    let isLiked = []
     this.setState(currentState => {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){
-          if(isAdd){
+          if(!postData.liked.includes(user)){
             postData.likes = postData.likes + 1;
-            postData.liked = true;
+            postData.liked = postData.liked.concat([user])
+            isLiked.push(true);
           }else {
             postData.likes = postData.likes -1;
-            postData.liked = false;
+            postData.liked = postData.liked.filter(name=>name !==user)
+            isLiked.push(false);
           }
         }
         return postData;
@@ -55,6 +57,8 @@ class App extends Component {
         postsData: newPostData,
       }
     })
+    console.table(isLiked)
+    return isLiked;
   }
   // filter desplayed list of posts by username
   filterPostsByUsername = (searchTerm) => {

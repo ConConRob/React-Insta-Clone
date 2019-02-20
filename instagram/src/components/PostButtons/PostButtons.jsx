@@ -1,24 +1,39 @@
 import React from 'react';
 import './PostButtons.css';
 export default class PostButtons extends React.Component{
+
+    state = {
+        isLikedByUser: false,
+    }
+
     handleLike = () => {
-        if(this.props.liked){
-            // already liked
-            // remove like
-            this.props.addLike(this.props.id, false)
-            this.setState({liked:false})
-        }else{
-            // not already liked 
-            // add like
-            this.props.addLike(this.props.id, true)
-            this.setState({liked:true})
+            this.props.addLike(this.props.id, this.props.user);
+            
+
+    }
+
+    
+    checkIfUserLiked = (user) => {
+        if(this.props.liked.includes(user)){
+  
+            return true;
+        } else {
+            
+            return false;
         }
+    }
+    
+    componentDidUpdate() {
+         const isLiked = this.checkIfUserLiked(this.props.user)
+         if(this.state.isLikedByUser !== isLiked){
+             this.setState({isLikedByUser: isLiked})
+         }
     }
     render() {
         return (
             <div className="post-buttons">
             {
-                this.props.liked?
+                this.state.isLikedByUser?
                     <i onClick={this.handleLike} className="fas fa-heart"></i>
                 :
                     <i onClick={this.handleLike}  className="far fa-heart"></i>
