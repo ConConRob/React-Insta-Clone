@@ -8,27 +8,23 @@ export default class PostButtons extends React.Component{
 
     handleLike = () => {
             this.props.addLike(this.props.id, this.props.user);
-            
-
     }
 
-    
     checkIfUserLiked = (user) => {
         if(this.props.liked.includes(user)){
-  
             return true;
         } else {
-            
             return false;
         }
     }
-    
+
     componentDidUpdate() {
          const isLiked = this.checkIfUserLiked(this.props.user)
          if(this.state.isLikedByUser !== isLiked){
              this.setState({isLikedByUser: isLiked})
          }
     }
+    
     render() {
         return (
             <div className="post-buttons">

@@ -3,7 +3,7 @@ import InsideApp from './components/App/InsideApp'
 import Login from './components/Login/Login'
 import dummyData from './dummy-data';
 import authenticate from './components/authentication/authenticate';
-
+import SearchBar from './components/SearchBar/SearchBar';
 import './App.css'
 const uuidv4 = require('uuid/v4');
 
@@ -37,18 +37,15 @@ class App extends Component {
   }
   // in the future keep track of who made the like
   addOrRemoveLike = (id, user) => {
-    let isLiked = []
     this.setState(currentState => {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){
           if(!postData.liked.includes(user)){
             postData.likes = postData.likes + 1;
             postData.liked = postData.liked.concat([user])
-            isLiked.push(true);
           }else {
             postData.likes = postData.likes -1;
             postData.liked = postData.liked.filter(name=>name !==user)
-            isLiked.push(false);
           }
         }
         return postData;
@@ -57,8 +54,6 @@ class App extends Component {
         postsData: newPostData,
       }
     })
-    console.table(isLiked)
-    return isLiked;
   }
   // filter desplayed list of posts by username
   filterPostsByUsername = (searchTerm) => {
@@ -97,6 +92,9 @@ class App extends Component {
     const AuthenticateInsideApp = authenticate(InsideApp, Login)
     return (
       <div className="App">
+        <SearchBar 
+          filterPostsByUsername={this.filterPostsByUsername}
+        />
         <AuthenticateInsideApp
           postsData={this.state.postsData} 
           addComment={this.addComment}

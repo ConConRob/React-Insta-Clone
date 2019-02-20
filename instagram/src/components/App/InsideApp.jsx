@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PostsPage from '../PostsPage/PostsPage';
-import SearchBar from '../SearchBar/SearchBar';
+
 import './InsideApp.css'
 import PT from 'prop-types';
 
@@ -11,9 +11,7 @@ class InsideApp extends Component {
      
       <div className="insta-app">
       {/* <button onClick={()=>console.log(this.allPosts)} >show data</button> */}
-        <SearchBar 
-          filterPostsByUsername={this.props.filterPostsByUsername}
-        />
+
         <PostsPage 
           postsData={this.props.postsData}
           user={this.props.user}
