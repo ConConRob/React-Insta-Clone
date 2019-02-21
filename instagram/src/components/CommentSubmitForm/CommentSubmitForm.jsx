@@ -1,6 +1,36 @@
 import React from 'react';
 import PT from 'prop-types';
-import './CommentSubmitForm.css'
+import styled from 'styled-components';
+
+const StyledForm = styled.form`
+    display: flex;
+    border-top: 1px solid rgb(199, 199, 199);
+    margin-top: 15px;
+    input{
+        border: none;
+        
+        margin-top: 5px;
+        padding: 15px;
+        width: 95%;
+        font-size: 16px;
+    }
+    input:focus,
+    input:active{
+        outline: none;
+        
+    }
+    button{
+        border:none;
+        background: none;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    button:focus,
+    button:active{
+        outline: none;
+    }
+`
+
 class CommentSubmitForm extends React.Component {
     constructor(props){
         super(props);
@@ -19,8 +49,7 @@ class CommentSubmitForm extends React.Component {
     }
     render(){
         return (
-            <form
-                className="comment-section-add-form" 
+            <StyledForm
                 onSubmit={(event) => {
                     this.handleSubmit(event,this.state.currentInputValue,this.props.id)
             }}
@@ -30,15 +59,13 @@ class CommentSubmitForm extends React.Component {
                     onChange={(event)=>this.handleChange(event)} 
                     value={this.state.currentInputValue}
                     type="text" 
-                    className="comment-section-add"  
                     placeholder="Add a comment..." 
                 />
                 <button 
-                    className="comment-section-add-button"
                      type="submit">
                          ...
                 </button>
-            </form>
+            </StyledForm>
         )
     }
 }
