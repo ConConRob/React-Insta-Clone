@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './PostButtons.css';
+
 const StyledPostButtons = styled.div`
     font-size: 24px;
     padding-top: 6px;
