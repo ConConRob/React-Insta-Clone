@@ -4,7 +4,8 @@ import Login from './components/Login/Login'
 import dummyData from './dummy-data';
 import authenticate from './components/authentication/authenticate';
 import SearchBar from './components/SearchBar/SearchBar';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Route from 'react-router-dom';
 const uuidv4 = require('uuid/v4');
 
 const StyledApp = styled.div`

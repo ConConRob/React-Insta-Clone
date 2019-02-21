@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import CommentSection from '../CommentSection/CommentSection';
 import UserHeader from '../UserHeader/UserHeader';
 import styled from 'styled-components';
-
+import {Route, Link} from "react-router-dom";
 const StyledPostContainer = styled.div`
     .post-image {
         width: 100%;
@@ -19,8 +19,9 @@ export default function PostContainer({user, postData, addComment, addOrRemoveLi
                 username={postData.username} 
                 thumbnailUrl={postData.thumbnailUrl}
             />
-            <img className="post-image" src={postData.imageUrl} alt="Post"/>
-           
+            <Link to={`${postData.id}`} >
+                <img className="post-image" src={postData.imageUrl} alt="Post"/>
+            </Link>
             <CommentSection 
                 user={user}
                 comments={postData.comments} 
