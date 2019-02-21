@@ -4,8 +4,13 @@ import Login from './components/Login/Login'
 import dummyData from './dummy-data';
 import authenticate from './components/authentication/authenticate';
 import SearchBar from './components/SearchBar/SearchBar';
-import './App.css'
+import styled from 'styled-components'
 const uuidv4 = require('uuid/v4');
+
+const StyledApp = styled.div`
+max-width: 600px;
+margin: 0 auto;
+`
 
 class App extends Component {
   constructor(props){
@@ -88,10 +93,12 @@ class App extends Component {
   componentWillUpdate() {
     localStorage.setItem('postsData', JSON.stringify(this.allPosts));
   }
+
+
   render() {
     const AuthenticateInsideApp = authenticate(InsideApp, Login)
     return (
-      <div className="App">
+      <StyledApp>
         <SearchBar 
           filterPostsByUsername={this.filterPostsByUsername}
         />
@@ -102,7 +109,7 @@ class App extends Component {
           filterPostsByUsername={this.filterPostsByUsername}
           deleteAComment={this.deleteAComment} 
         />
-      </div>
+      </StyledApp>
     );
   }
 }
