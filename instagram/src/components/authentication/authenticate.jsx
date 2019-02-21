@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const authenticate =(Component, LoginComponent) =>
     class Authenticate extends React.Component {
         state = {
