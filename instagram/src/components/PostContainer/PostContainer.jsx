@@ -2,11 +2,19 @@ import React from 'react';
 import PT from 'prop-types';
 import CommentSection from '../CommentSection/CommentSection';
 import UserHeader from '../UserHeader/UserHeader';
-import './PostContainer.css';
+import styled from 'styled-components';
+
+const StyledPostContainer = styled.div`
+    .post-image {
+        width: 100%;
+        margin: 0 auto;
+}
+`
+
 
 export default function PostContainer({user, postData, addComment, addOrRemoveLike, deleteAComment}){
     return (
-        <div className='post-container'>
+        <StyledPostContainer>
             <UserHeader 
                 username={postData.username} 
                 thumbnailUrl={postData.thumbnailUrl}
@@ -23,7 +31,7 @@ export default function PostContainer({user, postData, addComment, addOrRemoveLi
                 addOrRemoveLike={addOrRemoveLike}
                 deleteAComment={deleteAComment}
             />
-         </div>
+         </StyledPostContainer>
     )
 }
 PostContainer.propTypes = {
