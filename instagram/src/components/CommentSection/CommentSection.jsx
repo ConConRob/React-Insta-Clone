@@ -3,19 +3,27 @@ import PT from 'prop-types';
 import PostButtons from '../PostButtons/PostButtons'
 import Comment from '../Comment/Comment';
 import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
-import './CommentSection.css'
+import styled from 'styled-components';
+
+const StyledCommentSection = styled.div`
+    padding: 0 2.5%;
+    p{
+        margin: 0;
+        font-weight: 500;
+    }
+`
 
 export default function CommentSection({user, comments, likes, liked, id, addComment, addOrRemoveLike, deleteAComment}){
 
     return (
-        <div className="comment-section">
+        <StyledCommentSection>
             <PostButtons 
                 user={user} 
                 id={id} 
                 liked={liked} 
                 addLike={addOrRemoveLike} 
             />
-            <p className="post-likes">{`${likes} likes`}</p>
+            <p>{`${likes} likes`}</p>
             {
                 comments.map((comment, index) => 
                     <Comment 
@@ -30,7 +38,7 @@ export default function CommentSection({user, comments, likes, liked, id, addCom
                 )
             }
             <CommentSubmitForm user={user} id={id} addComment={addComment} />
-        </div>
+        </StyledCommentSection>
         
     )
 }
