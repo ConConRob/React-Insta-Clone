@@ -2,27 +2,37 @@ import React from 'react';
 import PT from 'prop-types';
 import CommentSection from '../CommentSection/CommentSection';
 import UserHeader from '../UserHeader/UserHeader';
-import './PostContainer.css';
+import styled from 'styled-components';
+import {Route, Link} from "react-router-dom";
+const StyledPostContainer = styled.div`
+    .post-image {
+        width: 100%;
+        margin: 0 auto;
+}
+`
 
-export default function PostContainer({postData, addComment, addLike, deleteAComment}){
+
+export default function PostContainer({user, postData, addComment, addOrRemoveLike, deleteAComment}){
     return (
-        <div className='post-container'>
+        <StyledPostContainer>
             <UserHeader 
                 username={postData.username} 
                 thumbnailUrl={postData.thumbnailUrl}
             />
-            <img className="post-image" src={postData.imageUrl} alt="Post"/>
-           
+            <Link to={`${postData.id}`} >
+                <img className="post-image" src={postData.imageUrl} alt="Post"/>
+            </Link>
             <CommentSection 
+                user={user}
                 comments={postData.comments} 
                 likes={postData.likes}
                 liked = {postData.liked} 
                 id={postData.id} 
                 addComment={addComment}
-                addLike={addLike}
+                addOrRemoveLike={addOrRemoveLike}
                 deleteAComment={deleteAComment}
             />
-         </div>
+         </StyledPostContainer>
     )
 }
 PostContainer.propTypes = {

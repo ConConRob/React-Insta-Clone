@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import PostContainer from './components/PostContainer/PostContainer.jsx';
+import InsideApp from './components/App/InsideApp'
+import Login from './components/Login/Login'
+import dummyData from './dummy-data';
+import authenticate from './components/authentication/authenticate';
 import SearchBar from './components/SearchBar/SearchBar';
-import PT from 'prop-types';
-import './App.css'
+import styled from 'styled-components';
+import Route from 'react-router-dom';
 const uuidv4 = require('uuid/v4');
+
+const StyledApp = styled.div`
+max-width: 600px;
+margin: 0 auto;
+`
 
 class App extends Component {
   constructor(props){
-    super(props);
-    this.state ={ postsData:[]};
-    this.allPosts = this.props.data;
+    super(props)
+    this.state ={ 
+      postsData:[],
+      currentUser: this.props.user
+    };
+    this.allPosts = dummyData;
   }
- 
-  componentDidMount() {
-    if(localStorage.getItem('postsData')){
-      this.allPosts = JSON.parse(localStorage.getItem('postsData'));
-      this.setState({postsData: this.allPosts});
-    }else {
-      this.setState({postsData: this.props.data})
-    }
-  }
-  componentWillUpdate() {
-    localStorage.setItem('postsData', JSON.stringify(this.allPosts));
-  }
+  
   // add a comment to list of comments for post 
   addComment = (user, text, id) => {
     this.setState(currentState => {
@@ -42,16 +42,16 @@ class App extends Component {
     })
   }
   // in the future keep track of who made the like
-  addOrRemoveLike = (id,isAdd) => {
+  addOrRemoveLike = (id, user) => {
     this.setState(currentState => {
       const newPostData = currentState.postsData.map(postData => {
         if(postData.id === id){
-          if(isAdd){
+          if(!postData.liked.includes(user)){
             postData.likes = postData.likes + 1;
-            postData.liked = true;
+            postData.liked = postData.liked.concat([user])
           }else {
             postData.likes = postData.likes -1;
-            postData.liked = false;
+            postData.liked = postData.liked.filter(name=>name !==user)
           }
         }
         return postData;
@@ -70,7 +70,6 @@ class App extends Component {
   }
   // delete a comment
   deleteAComment = (postID, commentID) => {
-    console.log('here')
     this.setState(currentState => {
       const newData = currentState.postsData.map(postData => {
 
@@ -79,33 +78,42 @@ class App extends Component {
         }
         return postData;
       })
-      console.log(newData)
       return {
         postsData: newData,
       }
     })
   }
+  componentDidMount() {
+    if(localStorage.getItem('postsData')){
+      this.allPosts = JSON.parse(localStorage.getItem('postsData'));
+      this.setState({postsData: this.allPosts});
+    }else {
+      this.setState({postsData: dummyData})
+    }
+  }
+  componentWillUpdate() {
+    localStorage.setItem('postsData', JSON.stringify(this.allPosts));
+  }
+
+
   render() {
+    const AuthenticateInsideApp = authenticate(InsideApp, Login)
     return (
-      <div className="App">
-      {/* <button onClick={()=>console.log(this.allPosts)} >show data</button> */}
+      <StyledApp>
         <SearchBar 
           filterPostsByUsername={this.filterPostsByUsername}
         />
-        {this.state.postsData.map((postData)=> 
-          <PostContainer 
-            key={postData.id}  
-            postData={postData} 
-            addComment={this.addComment}
-            addLike={this.addOrRemoveLike}
-            deleteAComment={this.deleteAComment}
-          /> 
-          )}
-      </div>
+        <AuthenticateInsideApp
+          postsData={this.state.postsData} 
+          addComment={this.addComment}
+          addOrRemoveLike={this.addOrRemoveLike}
+          filterPostsByUsername={this.filterPostsByUsername}
+          deleteAComment={this.deleteAComment} 
+        />
+      </StyledApp>
     );
   }
 }
-App.protoTypes = {
-  data: PT.array.isRequired,
-}
+
+
 export default App;

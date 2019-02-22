@@ -1,31 +1,51 @@
 import React from 'react';
-import './PostButtons.css';
+import styled from 'styled-components';
+
+const StyledPostButtons = styled.div`
+    font-size: 24px;
+    padding-top: 6px;
+    i.fa-comment{
+        margin-left: 15px;
+        transform: scale(-1, 1);
+    }
+`
 export default class PostButtons extends React.Component{
+
+    state = {
+        isLikedByUser: false,
+    }
+
     handleLike = () => {
-        if(this.props.liked){
-            // already liked
-            // remove like
-            this.props.addLike(this.props.id, false)
-            this.setState({liked:false})
-        }else{
-            // not already liked 
-            // add like
-            this.props.addLike(this.props.id, true)
-            this.setState({liked:true})
+            this.props.addLike(this.props.id, this.props.user);
+    }
+
+    checkIfUserLiked = (user) => {
+        if(this.props.liked.includes(user)){
+            return true;
+        } else {
+            return false;
         }
     }
+
+    componentDidUpdate() {
+         const isLiked = this.checkIfUserLiked(this.props.user)
+         if(this.state.isLikedByUser !== isLiked){
+             this.setState({isLikedByUser: isLiked})
+         }
+    }
+    
     render() {
         return (
-            <div className="post-buttons">
+            <StyledPostButtons>
             {
-                this.props.liked?
+                this.state.isLikedByUser?
                     <i onClick={this.handleLike} className="fas fa-heart"></i>
                 :
                     <i onClick={this.handleLike}  className="far fa-heart"></i>
             }
             
             <i className="far fa-comment"></i>
-            </div>
+            </StyledPostButtons>
         )
     }
 }

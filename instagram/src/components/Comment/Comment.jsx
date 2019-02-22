@@ -1,21 +1,45 @@
 import React from 'react';
 import PT from 'prop-types';
-import './Comment.css';
+import styled from 'styled-components';
 
-export default function Comment({username, text, postID, commentID, deleteAComment}){
+const StyledComment = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+span.comment-section-comment-user{
+    font-weight: 500;
+    padding-right: 10px;
+    font-size: 16px;
+}
+button{
+    width: 50px;
+    border: none;
+    background: none;
+    height: 16px;
+    font-size: 16px;
+    align-self: baseline;
+}
+button:active,
+button:hover{
+    outline: none;
+}
+`
+export default function Comment({loggedInUser, username, text, postID, commentID, deleteAComment}){
     function deleteHandler(){
         deleteAComment(postID, commentID)
     }
     
     return (
-        <div  className="comment-section-comment">
-        <div>
-            <span onClick={deleteHandler} className="comment-section-comment-user">{username}</span>
-            <span className="comment-section-comment-text">{text}</span>
-        </div>
-        
-        <button className="comment-section-comment-delete" onClick={deleteHandler}>Delete</button>
-        </div>
+        <StyledComment  >
+            <div>
+                <span className="comment-section-comment-user">{username}</span>
+                <span>{text}</span>
+            </div>
+            {
+             loggedInUser===username &&
+                <button  onClick={deleteHandler}>delete</button>
+            }
+        </StyledComment>
     )
 }
 

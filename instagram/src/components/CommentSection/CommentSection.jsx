@@ -3,18 +3,32 @@ import PT from 'prop-types';
 import PostButtons from '../PostButtons/PostButtons'
 import Comment from '../Comment/Comment';
 import CommentSubmitForm from '../CommentSubmitForm/CommentSubmitForm';
-import './CommentSection.css'
+import styled from 'styled-components';
 
-export default function CommentSection({comments, likes, liked, id, addComment, addLike, deleteAComment}){
+const StyledCommentSection = styled.div`
+    padding: 0 2.5%;
+    p{
+        margin: 0;
+        font-weight: 500;
+    }
+`
+
+export default function CommentSection({user, comments, likes, liked, id, addComment, addOrRemoveLike, deleteAComment}){
 
     return (
-        <div className="comment-section">
-             <PostButtons id={id} liked={liked} addLike={addLike} />
-            <p className="post-likes">{`${likes} likes`}</p>
+        <StyledCommentSection>
+            <PostButtons 
+                user={user} 
+                id={id} 
+                liked={liked} 
+                addLike={addOrRemoveLike} 
+            />
+            <p>{`${likes} likes`}</p>
             {
                 comments.map((comment, index) => 
                     <Comment 
-                        key={index} 
+                        key={index}
+                        loggedInUser={user} 
                         username={comment.username} 
                         text={comment.text}
                         postID={id}
@@ -23,8 +37,8 @@ export default function CommentSection({comments, likes, liked, id, addComment, 
                     />
                 )
             }
-            <CommentSubmitForm id={id} addComment={addComment} user={'Connor'}/>
-        </div>
+            <CommentSubmitForm user={user} id={id} addComment={addComment} />
+        </StyledCommentSection>
         
     )
 }
@@ -34,5 +48,5 @@ CommentSection.propTypes = {
     likes: PT.number.isRequired,
     id: PT.string.isRequired,
     addComment: PT.func.isRequired,
-    addLike: PT.func.isRequired,
+    addOrRemoveLike: PT.func.isRequired,
 }

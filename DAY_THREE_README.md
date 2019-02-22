@@ -11,6 +11,7 @@
 
 ### Description (Day III)
 
+
 - Today you will be building a "Higher Order Component" (HOC)
 - The HOC will not let users see the posts until they have logged in. (Our login system for this will be faked using LocalStorage).
 - The job of the HOC will be to render a login page if the user is not logged in, then render the posts after the user is logged in.
